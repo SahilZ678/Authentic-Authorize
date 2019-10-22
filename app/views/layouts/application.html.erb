@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PersonalPractice</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
+<head>
+  <title>Shop</title>
+  <%= stylesheet_link_tag	'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Rails Tutorial</a>
+        </div>
+        <div id= "navbar" class= "navbar-collapse collapse">
+          <ul class= "nav navbar-nav">
+            <li class= "dropdown">
+              <a href= "#" class= "toggle-dropdown" data-toggle= "dropdown" role= "button" aria-haspopup="true" aria-expanded="false">
+                Products
+                <span class = "caret"></span>
+              </a>
+              <ul class= "dropdown-menu" role= "menu">
+                <li><%= link_to "List", products_path %></li>
+                <li><%= link_to "New", new_product_path %></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="main-container" class="container">
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
