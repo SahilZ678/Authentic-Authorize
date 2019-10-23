@@ -6,6 +6,7 @@ table.table.table-striped.table-bordered.table-hover
     tr
       th.col-md-2 Name
       th.col-md-2 Price
+      th.col-md-2 Creator
       th.col-md-4 Options
 
   tbody
@@ -13,10 +14,11 @@ table.table.table-striped.table-bordered.table-hover
       tr
         td.col-md-2 = product.name
         td.col-md-2 = product.price
+        td.col-col-md-2 = product.user&.email
         td.col-md-4 
-          = link_to 'Show', product
-          = link_to 'Edit', edit_product_path(product)
-          = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+          = link_to 'Show', product, class: "btn btn-info"
+          = link_to 'Edit', edit_product_path(product), class: "btn btn-warning"
+          = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" 
 
 br
 
