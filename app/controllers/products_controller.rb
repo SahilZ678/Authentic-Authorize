@@ -5,7 +5,17 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.search params[:search].present? ? params[:search]: "*", order: :name, page: params[:page], per_page: 10
+    sort_by = {}
+    if params[:sort].present?
+      sort_by[:name] = :asc if params[:sort] == 'name-asc'
+      sort_by[:name] = :desc if params[:sort] == 'name-desc'
+      sort_by[:price] = :asc if params[:sort] == 'price-asc'
+      sort_by[:price] = :desc if params[:sort] == 'price-desc'
+    else
+      sort_by[:name] = :asc
+    end
+
+    @products = Product.search params[:search].present? ? params[:search]: "*", fields: [:name, :price, :user_id], order: sort_by, page: params[:page], per_page: 10
     respond_to do |format|
       format.js
       format.json

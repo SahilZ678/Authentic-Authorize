@@ -13,12 +13,12 @@ table.table.table-striped.table-bordered.table-hovertable.table-sm
     tr
       th.col-md-2.th-sm 
         = "Name"
-        span.glyphicon.glyphicon-triangle-bottom#name-asc
-        span.glyphicon.glyphicon-triangle-top#name-desc
+        span.glyphicon.glyphicon-triangle-bottom data-sort="name-asc" 
+        span.glyphicon.glyphicon-triangle-top data-sort="name-desc"
       th.col-md-2.th-sm 
         = "Price"
-        span.glyphicon.glyphicon-triangle-bottom#price-asc
-        span.glyphicon.glyphicon-triangle-top#price-desc
+        span.glyphicon.glyphicon-triangle-bottom data-sort="price-asc"
+        span.glyphicon.glyphicon-triangle-top data-sort="price-desc"
       th.col-md-2 Creator
       th.col-md-4 Options
 
@@ -31,13 +31,22 @@ br
 = link_to 'New Product', new_product_path, class: "btn btn-primary"
 
 javascript:
-  
+  $('span.glyphicon').on('click', function(){
+    $.ajax({
+      url: '/products',
+      type: 'GET',
+      data: {
+        sort: $(this).data('sort')
+      }
+    });
+  });
+
   function fetch_products(){
     $.ajax({
       url: '/products',
       type: 'GET',
       data: {
-        search: $('#search').val()
+        search: $('#search').val(),
       }
     });
   }
