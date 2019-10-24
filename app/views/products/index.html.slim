@@ -1,27 +1,43 @@
 = flash_messages
 h1 Products list
 .product-block
-table.table.table-striped.table-bordered.table-hover
+
+/ .input-group.flex-nowrap
+
+= form_tag products_path, method: :get do
+  = text_field_tag :search, params[:search],{placeholder: "Search Products...", class: "form-control", onkeyup: "fetch_products()"}
+br
+
+table.table.table-striped.table-bordered.table-hovertable.table-sm
   thead
     tr
-      th.col-md-2 Name
-      th.col-md-2 Price
+      th.col-md-2.th-sm 
+        = "Name"
+        span.glyphicon.glyphicon-triangle-bottom#name-asc
+        span.glyphicon.glyphicon-triangle-top#name-desc
+      th.col-md-2.th-sm 
+        = "Price"
+        span.glyphicon.glyphicon-triangle-bottom#price-asc
+        span.glyphicon.glyphicon-triangle-top#price-desc
       th.col-md-2 Creator
       th.col-md-4 Options
 
-  tbody
-    - @products.each do |product|
-      tr
-        td.col-md-2 = product.name
-        td.col-md-2 = product.price
-        td.col-col-md-2 = product.user&.email
-        td.col-md-4 
-          = link_to 'Show', product, class: "btn btn-info"
-          - if policy(product).edit?
-            = link_to 'Edit', edit_product_path(product), class: "btn btn-warning"
-          - if policy(product).destroy?
-            = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" 
-
+  tbody.results
+    = render @products
+#paginate
+  = render "paginate"
 br
 
 = link_to 'New Product', new_product_path, class: "btn btn-primary"
+
+javascript:
+  
+  function fetch_products(){
+    $.ajax({
+      url: '/products',
+      type: 'GET',
+      data: {
+        search: $('#search').val()
+      }
+    });
+  }
