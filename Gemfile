@@ -31,6 +31,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'pundit'
 gem 'kaminari'
 gem 'searchkick'
+gem 'carrierwave'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

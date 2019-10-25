@@ -5,7 +5,7 @@ h1 Products list
 / .input-group.flex-nowrap
 
 = form_tag products_path, method: :get do
-  = text_field_tag :search, params[:search],{placeholder: "Search Products...", class: "form-control", onkeyup: "fetch_products()"}
+  = text_field_tag :search, params[:search],{placeholder: "Search Products...", class: "form-control"}
 br
 
 table.table.table-striped.table-bordered.table-hovertable.table-sm
@@ -41,7 +41,19 @@ javascript:
     });
   });
 
-  function fetch_products(){
+  function delay(callback, ms) {
+    var timer = 0;
+    return function() {
+      var context = this, args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        callback.apply(context, args);
+      }, ms || 0);
+    };
+  }
+
+
+  function search_products(){
     $.ajax({
       url: '/products',
       type: 'GET',
@@ -50,3 +62,6 @@ javascript:
       }
     });
   }
+  $('#search').keyup(delay(function(e){
+    search_products()
+  },500));
