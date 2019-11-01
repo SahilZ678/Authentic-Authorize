@@ -1,21 +1,21 @@
 class ProductPolicy < ApplicationPolicy
     def new?
-        user.admin?
+        user.present? ? user.admin? : false 
     end
 
     def create?
-        user.admin?
+        user.present? ? user.admin? : false
     end
 
     def edit?
-        user.admin?
+        user.present? ? user.admin? : false
     end
 
     def update?
-        user.admin?
+        user.present? ? user.admin? : false
     end
 
     def destroy?
-        user.admin?
+        user.present? ? user.admin? : false
     end
 end

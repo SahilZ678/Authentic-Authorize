@@ -1,5 +1,5 @@
 = flash_messages
-h1 Product
+h1 = @product.name
 
 p#notice = notice
 
@@ -10,8 +10,8 @@ p
   strong Price:
   = "$#{@product.price}"
 
-div.img-fluid
-  = image_tag @product.image_url.to_s
+div.img-fluid 
+  = image_tag @product.image_url.to_s, style: "max-width: 100%;"
 
 => link_to 'Edit', edit_product_path(@product), class: 'btn btn-warning'
 '|

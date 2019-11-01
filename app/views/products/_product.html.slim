@@ -5,6 +5,6 @@ tr
     td.col-md-4 
         = link_to 'Show', product, class: "btn btn-info"
         - if policy(product).edit?
-        = link_to 'Edit', edit_product_path(product), class: "btn btn-warning"
+            = link_to 'Edit', edit_product_path(product), class: "btn btn-warning"
         - if policy(product).destroy?
-        = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" 
+            = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" 
