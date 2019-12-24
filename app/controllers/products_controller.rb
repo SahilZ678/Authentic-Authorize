@@ -14,8 +14,7 @@ class ProductsController < ApplicationController
     else
       sort_by[:name] = :asc
     end
-
-    @products = Product.search params[:search].present? ? params[:search]: "*", fields: [:name, :price, :user_id], order: sort_by, page: params[:page], per_page: 10
+    @products = Product.search params[:search].present? ? params[:search] : "*", fields: [:name, :price, :user_id], includes: [:user] , order: sort_by, page: params[:page], per_page: 10
     respond_to do |format|
       format.js
       format.json

@@ -4,4 +4,5 @@ class Product < ApplicationRecord
     belongs_to :user
     mount_uploader :image, ImageUploader
     scope :greater_than_hundred_thousand, -> {where("price > 100000")}
+    scope :search_import, -> { includes(:user) }
 end
